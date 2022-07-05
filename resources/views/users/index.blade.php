@@ -10,6 +10,12 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
+                    <div class="w-full flex justify-end">
+                        <x-button.create href="{{ route('users.create') }}">
+                            Novo usuário
+                        </x-button.create>
+                    </div>
+
                     <x-table.main>
                         <x-table.head>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
@@ -24,21 +30,27 @@
                         </x-table.head>
                         <x-table.body>
                             @foreach ($users as $user)
-                                <tr class="border-b">
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        {{ $user->id }}
-                                    </td>
-                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                        {{ $user->email }}
-                                    </td>
+                                @if (!$user->id === Auth::id())
+                                    <tr class="border-b">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                            {{ $user->id }}
+                                        </td>
+                                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                            {{ $user->email }}
+                                        </td>
 
-                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap flex flex-row space-x-2">
+                                        <td
+                                            class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap flex flex-row space-x-2">
+                                            <x-button.delete action="/users/{{ $user->id }}">
+                                                Deletar Usuário
+                                            </x-button.delete>
 
-                                        <x-button.delete action="/users/{{$user->id}}">
-                                            Deletar Usuário
-                                        </x-button.delete>
-                                    </td>
-                                </tr>
+                                            <x-button.edit href="{{ route('users.edit', $user->id) }}">
+                                                Editar Usuário
+                                            </x-button.edit>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </x-table.body>
                     </x-table.main>

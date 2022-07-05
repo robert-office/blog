@@ -15,10 +15,15 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->unsignedBigInteger('id_user');
             $table->longText('body')->nullable();
             $table->string('banner_path')->nullable();
             $table->timestamps();
+        });
+
+
+        Schema::table('posts', function (Blueprint $table) {
+            $table->foreign('id_user')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 

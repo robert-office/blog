@@ -18,22 +18,31 @@
 
                         <!-- Name -->
                         <div>
-                            <x-label for="name" :value="__('Name')" />
+                            <x-label for="title" :value="__('Titulo')" />
 
-                            <x-input id="name" class="block mt-1 w-full" type="text" name="name"
-                                :value="old('name')" required autofocus />
+                            <x-input id="title" class="block mt-1 w-full" type="text" name="title"
+                                :value="old('title')" required autofocus />
                         </div>
 
                         <div class="my-5">
                             <x-label for="categorias" :value="__('Categorias')" />
 
-                            <x-dropdown.wrapper wrapperName="categorias" buttonId="id_categoriasM">
+                            <x-dropdown.wrapper wrapperName="categorias-wrapper"
+                                buttonId="categorias-id-wrapper-button">
                                 @foreach ($categories as $category)
-                                    <x-dropdown.checkbox name="categorias[]" value="$category->id">
+                                    <x-dropdown.checkbox name="categories[]" value='{{ $category->id }}'>
                                         {{ $category->name }}
                                     </x-dropdown.checkbox>
                                 @endforeach
                             </x-dropdown.wrapper>
+                        </div>
+
+                        <!-- Name -->
+                        <div>
+                            <x-label for="banner" :value="__('Banner')" />
+
+                            <input type="file" class="filepond" name="banner"
+                                data-max-file-size="3MB">
                         </div>
 
                         <div class="flex items-center justify-end mt-4">

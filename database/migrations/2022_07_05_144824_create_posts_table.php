@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_user');
+            $table->string('title');
+            $table->slug('slug');
             $table->longText('body')->nullable();
             $table->string('banner_path')->nullable();
             $table->timestamps();

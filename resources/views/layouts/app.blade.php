@@ -9,6 +9,7 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+        <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -17,6 +18,7 @@
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
             @include('helpers.notification')
+            @include('helpers.filepond')
 
             <!-- Page Heading -->
             <header class="bg-white shadow">
@@ -30,5 +32,7 @@
                 {{ $slot }}
             </main>
         </div>
+
+        <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
     </body>
 </html>

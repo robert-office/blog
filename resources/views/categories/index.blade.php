@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Todos os seus Post') }}
+            {{ __('Todos as categorias') }}
         </h2>
     </x-slot>
 
@@ -11,8 +11,8 @@
                 <div class="p-6 bg-white border-b border-gray-200">
 
                     <div class="w-full flex justify-end">
-                        <x-button.create href="{{ route('posts.create') }}">
-                            Novo Post
+                        <x-button.create href="{{ route('categories.create') }}">
+                            Nova Categoria
                         </x-button.create>
                     </div>
 
@@ -22,7 +22,7 @@
                                 id
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                banner path
+                                name
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                 created_at
@@ -32,26 +32,26 @@
                             </th>
                         </x-table.head>
                         <x-table.body>
-                            @forelse ($posts as $post)
+                            @forelse ($categories as $category)
                                 <tr class="border-b">
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        {{ $post->id }}
+                                        {{ $category->id }}
                                     </td>
                                     <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                        {{ $post->banner_path }}
+                                        {{ $category->name }}
                                     </td>
                                     <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                        {{ $post->created_at }}
+                                        {{ $category->created_at }}
                                     </td>
 
                                     <td
                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap flex flex-row space-x-2">
-                                        <x-button.delete action="/posts/{{ $post->id }}">
-                                            Deletar Post
+                                        <x-button.delete action="/categories/{{ $category->id }}">
+                                            Deletar Categoria
                                         </x-button.delete>
 
-                                        <x-button.edit href="{{ route('posts.edit', $post->id) }}">
-                                            Editar Post
+                                        <x-button.edit href="{{ route('categories.edit', $category->id) }}">
+                                            Editar Categoria
                                         </x-button.edit>
                                     </td>
                                 </tr>
@@ -62,7 +62,7 @@
                             @endforelse
                         </x-table.body>
 
-                        {{ $posts->links() }}
+                        {{ $categories->links() }}
 
                     </x-table.main>
                 </div>

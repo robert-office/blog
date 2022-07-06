@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_user');
             $table->unsignedBigInteger('id_role');
+            $table->timestamps();
         });
 
         Schema::table('user_role', function (Blueprint $table) {

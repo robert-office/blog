@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Traits\HasNotificable;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
+
+    use HasNotificable;
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +18,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('created_at', 'desc')->paginate(1);
+        $categories = Category::orderBy('created_at', 'desc')->paginate(10);
 
         return view('categories.index', compact('categories'));
     }
@@ -38,7 +41,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $categoriaValida = $request->validate([
+            'name'  => 'required|max:128|unique:categories,name',
+        ]);
+
+        if (Category::create($categoriaValida) ){
+            $this->HandleNotification(message: "Categoria criada com sucesso");
+            return redirect()->back();
+        }
     }
 
     /**
@@ -59,9 +69,16 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $post)
+    public function update(Request $request, Category $category)
     {
-        //
+        $categoriaValida = $request->validate([
+            'name'  => 'required|max:128|unique:categories,name',
+        ]);
+
+        if ($category->update($categoriaValida) ){
+            $this->HandleNotification(message: "Categoria editada com sucesso");
+            return redirect()->back();
+        }
     }
 
     /**
@@ -72,6 +89,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-
+        $category->delete();
+        return back();
     }
 }

@@ -46,13 +46,13 @@
 
                                     <td
                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap flex flex-row space-x-2">
-                                        <x-button.delete action="/categories/{{ $category->id }}">
-                                            Deletar Categoria
-                                        </x-button.delete>
-
                                         <x-button.edit href="{{ route('categories.edit', $category->id) }}">
                                             Editar Categoria
                                         </x-button.edit>
+
+                                        <x-button.delete action="/categories/{{ $category->id }}">
+                                            Deletar Categoria
+                                        </x-button.delete>
                                     </td>
                                 </tr>
                             @empty
@@ -62,9 +62,9 @@
                             @endforelse
                         </x-table.body>
 
-                        {{ $categories->links() }}
 
                     </x-table.main>
+                    {{ $categories->links() }}
                 </div>
             </div>
         </div>

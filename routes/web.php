@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,5 +28,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('posts', PostController::class);
     Route::resource('categories', CategoryController::class);
 });
+
+/// route for uploading files with tmp files
+Route::post('posts/upload', [UploadController::class, 'upload']);
 
 require __DIR__.'/auth.php';

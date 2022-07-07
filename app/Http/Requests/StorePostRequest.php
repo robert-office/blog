@@ -26,6 +26,7 @@ class StorePostRequest extends FormRequest
         return [
             'title' => 'required|unique:posts,title|max:255',
             'body' => 'required',
+            'categories' => 'required|array',
         ];
     }
 }

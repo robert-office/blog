@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_user');
             $table->string('title');
-            $table->slug('slug');
+            $table->string('slug');
             $table->longText('body')->nullable();
             $table->string('banner_path')->nullable();
             $table->timestamps();

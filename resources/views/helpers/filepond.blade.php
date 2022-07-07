@@ -11,6 +11,14 @@
 
     // Create a FilePond instance
     const pond = FilePond.create(inputElement);
+    FilePond.setOptions({
+        server: {
+            url: '/posts/upload',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        }
+    });
 
     // How to use with Pintura Image Editor:
     // https://pqina.nl/pintura/docs/latest/getting-started/installation/filepond/

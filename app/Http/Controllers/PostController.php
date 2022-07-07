@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
-use App\Http\Requests\UploadPostRequest;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\TemporaryFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,7 +43,20 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
+        $post = Post::create([
+            'title' => $request->title,
+            'body' => $request->body
+        ]);
 
+        $post->categories()->attach($request->categories);
+
+        $temporaryFile = TemporaryFile::where('folder', $request->banner)->first();
+        if( $temporaryFile ){
+            $post->addMedia(storage_path('app/public/tmp/banners/' . $request->banner . '/' . $temporaryFile->filename))
+            ->toMediaCollection('banners');
+        }
+
+        back();
     }
 
     /**
@@ -66,7 +79,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+
     }
 
     /**
@@ -75,13 +88,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        var_dump($id);
-    }
-
-    public function upload( UploadPostRequest $resqust, Post $post )
-    {
-
+        $post->delete();
+        back();
     }
 }

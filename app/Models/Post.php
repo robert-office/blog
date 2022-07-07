@@ -13,7 +13,7 @@ class Post extends Model implements HasMedia
     use InteractsWithMedia;
 
     protected $fillable = [
-        'id_user',
+        'user_id',
         'body',
         'banner_path',
     ];
@@ -23,6 +23,6 @@ class Post extends Model implements HasMedia
     }
 
     public function categories() {
-        return $this->hasManyThrough(Category::class, PostCategory::class);
+        return $this->belongsToMany(Category::class, 'category_posts');
     }
 }

@@ -15,17 +15,16 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_user');
-            $table->string('title');
-            $table->string('slug');
+            $table->unsignedBigInteger('user_id');
+            $table->string('title')->nullable();
+            $table->string('slug')->nullable();
             $table->longText('body')->nullable();
-            $table->string('banner_path')->nullable();
             $table->timestamps();
         });
 
 
         Schema::table('posts', function (Blueprint $table) {
-            $table->foreign('id_user')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 

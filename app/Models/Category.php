@@ -14,6 +14,6 @@ class Category extends Model
     ];
 
     public function posts() {
-        return $this->hasManyThrough(Post::class, PostCategory::class);
+        return $this->belongsToMany(Post::class, 'category_posts');
     }
 }

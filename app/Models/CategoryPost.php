@@ -5,12 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PostCategory extends Model
+class CategoryPost extends Model
 {
     use HasFactory;
 
+    public $table = 'category_post';
+
     protected $fillable = [
-        'id_post',
-        'id_category',
+        'post_id',
+        'category_id'
     ];
+
 }

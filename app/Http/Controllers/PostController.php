@@ -44,19 +44,19 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $post = Post::create([
+            'user_id' => Auth::user()->id,
             'title' => $request->title,
-            'body' => $request->body
         ]);
 
-        $post->categories()->attach($request->categories);
+        $post->categories()->sync($request->get('categories'));
 
         $temporaryFile = TemporaryFile::where('folder', $request->banner)->first();
         if( $temporaryFile ){
-            $post->addMedia(storage_path('app/public/tmp/banners/' . $request->banner . '/' . $temporaryFile->filename))
+            $post->addMedia(storage_path('app/tmp/banners/' . $request->banner . '/' . $temporaryFile->filename))
             ->toMediaCollection('banners');
         }
 
-        back();
+        return back();
     }
 
     /**
@@ -91,6 +91,6 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        back();
+        return back();
     }
 }

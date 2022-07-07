@@ -18,7 +18,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::where('id', Auth::user()->id)->paginate(1);
+        $posts = Post::where('user_id', Auth::user()->id)->paginate(15);
 
         return view('posts.index', compact('posts'));
     }
@@ -41,7 +41,7 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePostRequest $request)
+    public function store(Request $request)
     {
         $post = Post::create([
             'user_id' => Auth::user()->id,

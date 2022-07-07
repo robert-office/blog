@@ -22,13 +22,16 @@
                                 id
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                banner path
+                                titulo
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                created_at
+                                banner img
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                actions
+                                criado em
+                            </th>
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                ações
                             </th>
                         </x-table.head>
                         <x-table.body>
@@ -38,12 +41,14 @@
                                         {{ $post->id }}
                                     </td>
                                     <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                        {{ $post->banner_path }}
+                                        {{ $post->title }}
+                                    </td>
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                        <img src="{{ $post->getFirstMediaUrl('banners', 'redondinho') }}" />
                                     </td>
                                     <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                         {{ $post->created_at }}
                                     </td>
-
                                     <td
                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap flex flex-row space-x-2">
                                         <x-button.delete action="/posts/{{ $post->id }}">

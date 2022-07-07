@@ -21,7 +21,7 @@
                                 <x-label for="title" :value="__('Titulo')" />
 
                                 <x-input id="title" class="block mt-1 w-full" type="text" name="title"
-                                    :value="old('title')" required autofocus />
+                                    :value="old('titulo')" required autofocus />
                             </div>
 
                             <div class="sm:w-1/4 w-full">

@@ -16,29 +16,30 @@
                     <form method="POST" action="{{ route('posts.store') }}">
                         @csrf
 
-                        <!-- Name -->
-                        <div>
-                            <x-label for="title" :value="__('Titulo')" />
+                        <div class="w-full flex sm:flex-row flex-col sm:space-x-10 space-y-5 sm:space-y-0">
+                            <div class="sm:w-3/4 w-full">
+                                <x-label for="title" :value="__('Titulo')" />
 
-                            <x-input id="title" class="block mt-1 w-full" type="text" name="title"
-                                :value="old('title')" required autofocus />
+                                <x-input id="title" class="block mt-1 w-full" type="text" name="title"
+                                    :value="old('title')" required autofocus />
+                            </div>
+
+                            <div class="sm:w-1/4 w-full">
+                                <x-label for="categorias" :value="__('Categorias')" />
+
+                                <x-dropdown.wrapper wrapperName="categorias-wrapper"
+                                    buttonId="categorias-id-wrapper-button">
+                                    @foreach ($categories as $category)
+                                        <x-dropdown.checkbox name="categories[]" value='{{ $category->id }}'>
+                                            {{ $category->name }}
+                                        </x-dropdown.checkbox>
+                                    @endforeach
+                                </x-dropdown.wrapper>
+                            </div>
                         </div>
 
+                        <!-- Name -->
                         <div class="my-5">
-                            <x-label for="categorias" :value="__('Categorias')" />
-
-                            <x-dropdown.wrapper wrapperName="categorias-wrapper"
-                                buttonId="categorias-id-wrapper-button">
-                                @foreach ($categories as $category)
-                                    <x-dropdown.checkbox name="categories[]" value='{{ $category->id }}'>
-                                        {{ $category->name }}
-                                    </x-dropdown.checkbox>
-                                @endforeach
-                            </x-dropdown.wrapper>
-                        </div>
-
-                        <!-- Name -->
-                        <div>
                             <x-label for="banner" :value="__('Banner')" />
 
                             <input type="file" class="filepond" name="banner"

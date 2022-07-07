@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UploadPostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -77,5 +78,10 @@ class PostController extends Controller
     public function destroy($id)
     {
         var_dump($id);
+    }
+
+    public function upload( UploadPostRequest $resqust, Post $post )
+    {
+
     }
 }

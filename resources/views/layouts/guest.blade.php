@@ -24,6 +24,8 @@
     </div>
 
     <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+    @include('helpers.notification')
+    @include('helpers.filepond')
 </body>
 
 </html>

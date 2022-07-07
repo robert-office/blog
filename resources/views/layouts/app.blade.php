@@ -17,8 +17,6 @@
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
-            @include('helpers.notification')
-            @include('helpers.filepond')
 
             <!-- Page Heading -->
             <header class="bg-white shadow">
@@ -34,5 +32,8 @@
         </div>
 
         <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+
+        @include('helpers.notification')
+        @include('helpers.filepond')
     </body>
 </html>

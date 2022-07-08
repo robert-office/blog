@@ -6,12 +6,6 @@
     const TOOLBARS_OPTIONS = [
         ['bold', 'italic', 'underline', 'strike'], // toggled buttons
         ['blockquote', 'code-block'],
-
-        [{
-            'header': 1
-        }, {
-            'header': 2
-        }], // custom button values
         [{
             'list': 'ordered'
         }, {
@@ -30,14 +24,10 @@
         [{
             'direction': 'rtl'
         }], // text direction
-
+        ['link', 'formula'],
         [{
             'size': ['small', false, 'large', 'huge']
         }], // custom dropdown
-        [{
-            'header': [1, 2, 3, 4, 5, 6, false]
-        }],
-
         [{
             'color': []
         }, {
@@ -58,4 +48,6 @@
         },
         theme: 'snow'
     });
+
+    @yield('quilljs')
 </script>

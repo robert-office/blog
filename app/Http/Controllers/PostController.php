@@ -45,6 +45,7 @@ class PostController extends Controller
         $post = Post::create([
             'user_id' => Auth::user()->id,
             'title' => $request->title,
+            'body' => $request->body
         ]);
 
         $post->categories()->sync($request->get('categories'));

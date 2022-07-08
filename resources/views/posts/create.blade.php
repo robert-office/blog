@@ -48,11 +48,17 @@
                         <!-- Name -->
                         <div class="my-5">
                             <x-label for="editor" :value="__('Editor')" />
-                            <div id="editor">
-                                <p>Hello World!</p>
-                                <p>Some initial <strong>bold</strong> text</p>
-                                <p><br></p>
-                            </div>
+                            <input type="text" hidden id="bodyEditor" name="body" />
+                            <div id="editor"></div>
+
+                            @section('quilljs')
+                                let body = document.getElementById('bodyEditor');
+                                QUILL.on('text-change', function(delta, oldDelta, source) {
+                                    if (source == 'user') {
+                                        body.value = QUILL.root.innerHTML;
+                                    }
+                                });
+                            @endsection
                         </div>
 
                         <div class="flex items-center justify-end mt-4">

@@ -2,26 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TemporaryFile;
-use Illuminate\Http\Request;
+use App\Services\UploadService;
 
 class UploadController extends Controller
 {
-    public function upload(Request $request) : string
-    {
-        if( $request->hasFile('banner') ) {
-            $file = $request->file('banner');
-            $filename = $file->getClientOriginalName();
-            $folder = uniqid() . '-' . now()->timestamp;
-            $file->storeAs('tmp/banners/' . $folder, $filename);
-
-            TemporaryFile::create([
-                'folder' => $folder,
-                'filename' => $filename
-            ]);
-
-            return $folder;
-        }
-        return '';
+    public function upload( UploadService $uploadService) : string {
+        return $uploadService->uploadTmpFile('banner', 'tmp/banners/');
     }
 }

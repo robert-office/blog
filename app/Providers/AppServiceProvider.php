@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Services\UploadService;
+use Illuminate\Http\Client\Request;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->when(UploadService::class)
+            ->needs(Request::class)
+            ->give(function (){
+                return request();
+            });
     }
 
     /**

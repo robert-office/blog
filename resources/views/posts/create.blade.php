@@ -42,8 +42,17 @@
                         <div class="my-5">
                             <x-label for="banner" :value="__('Banner')" />
 
-                            <input type="file" class="filepond" name="banner"
-                                data-max-file-size="3MB">
+                            <input type="file" class="filepond" name="banner" data-max-file-size="3MB">
+                        </div>
+
+                        <!-- Name -->
+                        <div class="my-5">
+                            <x-label for="editor" :value="__('Editor')" />
+                            <div id="editor">
+                                <p>Hello World!</p>
+                                <p>Some initial <strong>bold</strong> text</p>
+                                <p><br></p>
+                            </div>
                         </div>
 
                         <div class="flex items-center justify-end mt-4">

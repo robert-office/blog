@@ -47,7 +47,7 @@
                                         <img width="56px" height="56px" src="{{ $post->getFirstMediaUrl('banners') }}" />
                                     </td>
                                     <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                        {{ $post->created_at }}
+                                        {{ $post->created_at->format('d/m/Y - H:i') }}
                                     </td>
                                     <td
                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap flex flex-row space-x-2">

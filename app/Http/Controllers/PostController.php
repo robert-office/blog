@@ -51,9 +51,9 @@ class PostController extends Controller
         $post->categories()->sync($request->get('categories'));
 
         $temporaryFile = TemporaryFile::where('folder', $request->banner)->first();
-        if( $temporaryFile ){
+        if ($temporaryFile) {
             $post->addMedia(storage_path('app/tmp/banners/' . $request->banner . '/' . $temporaryFile->filename))
-            ->toMediaCollection('banners');
+                ->toMediaCollection('banners');
         }
 
         return back();
@@ -70,7 +70,7 @@ class PostController extends Controller
         $allCategories = Category::all();
         $categoriesOfPost = $post->categories()->get(['category_id'])->toArray();
 
-        $colletion = collect($categoriesOfPost)->map(fn($category) => $category['category_id']);
+        $colletion = collect($categoriesOfPost)->map(fn ($category) => $category['category_id']);
         $categoriesOfPost1d = $colletion->toArray();
 
         return view('posts.edit', compact('post', 'allCategories', 'categoriesOfPost1d'));
@@ -85,7 +85,25 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $post->update([
+            'user_id' => Auth::user()->id,
+            'title' => $request->title,
+            'body' => $request->body
+        ]);
 
+        $post->categories()->sync($request->get('categories'));
+
+        if ($request->banner) {
+            $temporaryFile = TemporaryFile::where('folder', $request->banner)->first();
+            if ($temporaryFile) {
+                $post->media()->delete();
+                $post->addMedia(storage_path('app/tmp/banners/' . $request->banner . '/' . $temporaryFile->filename))
+                    ->toMediaCollection('banners');
+            }
+        }
+
+
+        return back();
     }
 
     /**

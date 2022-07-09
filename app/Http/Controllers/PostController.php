@@ -67,7 +67,15 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.edit', compact('post'));
+        $allCategories = Category::all();
+        $categoriesOfPost = $post->categories()->get(['category_id'])->toArray();
+
+        $colletion = collect($categoriesOfPost);
+        $filter = $colletion->map(fn($category) => $category['category_id']);
+
+        $categoriesOfPost1d = $filter->toArray();
+
+        return view('posts.edit', compact('post', 'allCategories', 'categoriesOfPost1d'));
     }
 
     /**
